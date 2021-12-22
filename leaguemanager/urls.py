@@ -21,6 +21,7 @@ from restapi import views
 router = routers.DefaultRouter()
 router.register(r'players', views.PlayerView, basename='players')
 router.register(r'teams', views.TeamView, basename='teams')
+router.register(r'games', views.GameView, basename='games')
 
 urlpatterns = [
     path('', include(router.urls)),

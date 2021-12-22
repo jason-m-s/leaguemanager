@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from restapi.models import Player, Team
-from restapi.serializers import PlayerSerializer, TeamSerializer
+from restapi.models import Player, Team, Game
+from restapi.serializers import PlayerSerializer, TeamSerializer, GameSerializer
 from restapi.services import PlayerService, TeamService
 
 
@@ -32,3 +32,11 @@ class TeamView(viewsets.ModelViewSet):
     def get_queryset(self):
         return TeamService.get_teams(self.request.user)
 
+
+class GameView(viewsets.ModelViewSet):
+    """
+    API endpoint that allows games to be viewed
+    """
+    model = Game
+    serializer_class = GameSerializer
+    queryset = Game.objects.all().order_by('-end_date', '-created_date')

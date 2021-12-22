@@ -8,7 +8,7 @@ class PlayerService:
 
     @staticmethod
     def get_players(user) -> QuerySet:
-        return UserFacade.get_all_players(user)
+        return UserFacade.get_all_players(user).order_by('created_date')
 
     @staticmethod
     def get_players_over_percentile(user, percentile) -> QuerySet:
@@ -31,4 +31,4 @@ class TeamService:
 
     @staticmethod
     def get_teams(user):
-        return UserFacade.get_teams(user)
+        return UserFacade.get_teams(user).order_by('name')
