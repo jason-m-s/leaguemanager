@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
-from leaguemanager.quickstart import views
+from restapi import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'players', views.PlayerView, basename='players')
+router.register(r'teams', views.TeamView, basename='teams')
 
 urlpatterns = [
     path('', include(router.urls)),
