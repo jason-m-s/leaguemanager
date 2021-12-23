@@ -20,12 +20,17 @@ class PlayerView(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        percentile = self.request.query_params.get('percentile')
+        players = PlayerService.get_players(self.request.user)
 
+        percentile = self.request.query_params.get('percentile')
         if percentile:
-            return PlayerService.get_players_over_percentile(user, int(percentile))
-        else:
-            return PlayerService.get_players(self.request.user)
+            players = PlayerService.get_players_over_percentile(user, int(percentile))
+
+        team_id = self.request.query_params.get('team_id')
+        if team_id:
+            players = players.filter(team_id__exact=team_id)
+
+        return players
 
     def get_object(self):
         obj = get_object_or_404(Player.objects.all(), pk=self.kwargs["pk"])
