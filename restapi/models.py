@@ -5,7 +5,6 @@ from django.db.models.functions import Coalesce
 
 
 class LeagueUser(AbstractUser):
-
     class UserTypeChoice(models.TextChoices):
         ADMIN = 'ADM', 'Admin'
         COACH = 'CCH', 'Coach'
@@ -21,7 +20,7 @@ class Team(models.Model):
 
 
 class Coach(models.Model):
-    user = models.OneToOneField(LeagueUser, on_delete=models.CASCADE, primary_key=True)
+    id = models.OneToOneField(LeagueUser, on_delete=models.CASCADE, primary_key=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
@@ -37,7 +36,8 @@ class Game(models.Model):
 
 
 class Player(models.Model):
-    user = models.OneToOneField(LeagueUser, on_delete=models.CASCADE, primary_key=True)
+    id = models.OneToOneField(LeagueUser, on_delete=models.CASCADE, primary_key=True)
+    name = models.CharField(max_length=150)
     height_cm = models.IntegerField()
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
@@ -45,7 +45,7 @@ class Player(models.Model):
     games = models.ManyToManyField(Game, through='PlayerGame')
 
     def get_player_summary(self):
-        summary = PlayerGame.objects.filter(player_id__exact=self.id) \
+        summary = PlayerGame.objects.filter(player_id__exact=self.id.id) \
             .aggregate(total=Coalesce(Sum('score'), 0), count=Coalesce(Count('score'), 0))
         return [summary['total'], summary['count']]
 

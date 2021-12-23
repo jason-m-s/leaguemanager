@@ -1,35 +1,33 @@
 from django.db.models import QuerySet
 
-from restapi.models import Player, Coach, Team
+from restapi.models import Player, Coach, Team, LeagueUser
 
 
 class UserFacade:
 
     @staticmethod
     def get_all_players(user) -> QuerySet:
-        if user == 'COACH':
-            # TODO: Get PK from user
-            # TODO: Validate if coach has team set
-            coach = Coach.objects.get(pk=1)
-            return Player.objects.filter(team_id__exact=coach.id)
+        players = Player.objects.none()
 
-        return Player.objects.all()
+        if user.user_type == LeagueUser.UserTypeChoice.COACH:
+            team_id = Coach.objects.get(pk=user.id).team_id
+            if team_id is not None:
+                players = Player.objects.filter(team_id__exact=team_id)
 
-    @staticmethod
-    def get_player(user, player_id) -> QuerySet:
-        if user == 'COACH':
-            # TODO: Get PK from user
-            # TODO: Validate if coach has team set
-            # TODO: Validate if coach has permissions to this team
-            coach = Coach.objects.get(pk=1)
+        if user.user_type == LeagueUser.UserTypeChoice.ADMIN:
+            players = Player.objects.all()
 
-        return Player.objects.get(pk=player_id)
+        return players
 
     @staticmethod
     def get_teams(user) -> QuerySet:
-        if user == 'COACH':
-            # TODO: Get PK from user
-            coach = Coach.objects.get(pk=1)
-            return Team.objects.none() if coach.team_id is None else Team.objects.filter(team_id__exact=coach.team_id)
+        teams = Coach.objects.none()
 
-        return Team.objects.all()
+        if user.user_type == LeagueUser.UserTypeChoice.COACH:
+            team_id = Coach.objects.get(pk=user.id).team_id
+            teams = Team.objects.filter(id__exact=team_id)
+
+        if user.user_type == LeagueUser.UserTypeChoice.ADMIN:
+            teams = Team.objects.all()
+
+        return teams

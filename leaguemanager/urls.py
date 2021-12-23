@@ -31,7 +31,6 @@ games_router.register(r'events', GameEventView, basename='game-events')
 urlpatterns = [
     path(r'', include(router.urls)),
     path(r'', include(games_router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('token/', views.obtain_auth_token),
     path('admin/', admin.site.urls),
 ]

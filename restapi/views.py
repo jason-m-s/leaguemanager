@@ -1,4 +1,6 @@
 from rest_framework import viewsets
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 
 from restapi.models import Player, Team, Game, GameEvent
@@ -13,6 +15,8 @@ class PlayerView(viewsets.ModelViewSet):
     """
     model = Player
     serializer_class = PlayerSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated & (IsLeagueAdmin | IsLeagueCoach)]
 
     def get_queryset(self):
         user = self.request.user
@@ -23,6 +27,11 @@ class PlayerView(viewsets.ModelViewSet):
         else:
             return PlayerService.get_players(self.request.user)
 
+    def get_object(self):
+        obj = get_object_or_404(Player.objects.all(), pk=self.kwargs["pk"])
+        self.check_object_permissions(self.request, obj)
+        return obj
+
 
 class TeamView(viewsets.ModelViewSet):
     """
@@ -30,9 +39,16 @@ class TeamView(viewsets.ModelViewSet):
     """
     model = Team
     serializer_class = TeamSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated & (IsLeagueAdmin | IsLeagueCoach)]
 
     def get_queryset(self):
         return TeamService.get_teams(self.request.user)
+
+    def get_object(self):
+        obj = get_object_or_404(Team.objects.all(), pk=self.kwargs["pk"])
+        self.check_object_permissions(self.request, obj)
+        return obj
 
 
 class GameView(viewsets.ModelViewSet):
@@ -42,6 +58,8 @@ class GameView(viewsets.ModelViewSet):
     model = Game
     serializer_class = GameSerializer
     queryset = Game.objects.all().order_by('-end_date', '-created_date')
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 class GameEventView(viewsets.ModelViewSet):
@@ -50,6 +68,8 @@ class GameEventView(viewsets.ModelViewSet):
     """
     model = GameEvent
     serializer_class = GameEventSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return GameEvent.objects.filter(game_id__exact=self.kwargs['games_pk'])

@@ -9,8 +9,8 @@
     is_staff: false
     is_active: true
     user_type: ADM
-    groups: [ 1 ]
-    user_permissions: [ ]
+    groups: []
+    user_permissions: []
 - model: restapi.leagueuser
   pk: 2
   fields:
@@ -21,8 +21,8 @@
     is_staff: false
     is_active: true
     user_type: CCH
-    groups: [ 2 ]
-    user_permissions: [ ]
+    groups: []
+    user_permissions: []
 - model: restapi.leagueuser
   pk: 3
   fields:
@@ -33,8 +33,8 @@
     is_staff: false
     is_active: true
     user_type: CCH
-    groups: [ 2 ]
-    user_permissions: [ ]
+    groups: []
+    user_permissions: []
 - model: restapi.leagueuser
   pk: 4
   fields:
@@ -42,12 +42,11 @@
     is_superuser: false
     username: player1A@domain.com
     email: player1A@domain.com
-    first_name: 1A
     is_staff: false
     is_active: true
     user_type: PLY
-    groups: [ 3 ]
-    user_permissions: [ ]
+    groups: []
+    user_permissions: []
 - model: restapi.leagueuser
   pk: 5
   fields:
@@ -55,12 +54,11 @@
     is_superuser: false
     username: player2A@domain.com
     email: player2A@domain.com
-    first_name: 2A
     is_staff: false
     is_active: true
     user_type: PLY
-    groups: [ 3 ]
-    user_permissions: [ ]
+    groups: []
+    user_permissions: []
 - model: restapi.leagueuser
   pk: 6
   fields:
@@ -68,12 +66,11 @@
     is_superuser: false
     username: player1B@domain.com
     email: player1B@domain.com
-    first_name: 1B
     is_staff: false
     is_active: true
     user_type: PLY
-    groups: [ 3 ]
-    user_permissions: [ ]
+    groups: []
+    user_permissions: []
 - model: restapi.leagueuser
   pk: 7
   fields:
@@ -81,12 +78,11 @@
     is_superuser: false
     username: player2B@domain.com
     email: player2B@domain.com
-    first_name: 2B
     is_staff: false
     is_active: true
     user_type: PLY
-    groups: [ 3 ]
-    user_permissions: [ ]
+    groups: []
+    user_permissions: []
 
 # Teams
 - model: restapi.Team
@@ -120,6 +116,7 @@
 - model: restapi.Player
   pk: 4
   fields:
+    name: 1A
     height_cm: 175
     team_id: 1
     created_date: 2021-09-09 04:00:00Z
@@ -127,6 +124,7 @@
 - model: restapi.Player
   pk: 5
   fields:
+    name: 2A
     height_cm: 180
     team_id: 1
     created_date: 2021-09-09 04:00:00Z
@@ -134,6 +132,7 @@
 - model: restapi.Player
   pk: 6
   fields:
+    name: 1B
     height_cm: 176
     team_id: 2
     created_date: 2021-09-09 04:00:00Z
@@ -141,6 +140,7 @@
 - model: restapi.Player
   pk: 7
   fields:
+    name: 2B
     height_cm: 181
     team_id: 2
     created_date: 2021-09-09 04:00:00Z
