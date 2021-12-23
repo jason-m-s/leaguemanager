@@ -15,16 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from rest_framework import routers
+from rest_framework_nested import routers
+
 from restapi import views
+from restapi.views import GameEventView
 
 router = routers.DefaultRouter()
 router.register(r'players', views.PlayerView, basename='players')
 router.register(r'teams', views.TeamView, basename='teams')
 router.register(r'games', views.GameView, basename='games')
 
+games_router = routers.NestedSimpleRouter(router, r'games', lookup='games')
+games_router.register(r'events', GameEventView, basename='game-events')
+
 urlpatterns = [
-    path('', include(router.urls)),
+    path(r'', include(router.urls)),
+    path(r'', include(games_router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
 ]
