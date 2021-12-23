@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from restapi.models import Player, PlayerGame, Team, Game, GameEvent
+from restapi.models import Player, Team, Game, GameEvent
 
 
 class PlayerSerializer(serializers.ModelSerializer):

@@ -30,7 +30,7 @@ class PlayerView(viewsets.ModelViewSet):
         if team_id:
             players = players.filter(team_id__exact=team_id)
 
-        return players
+        return players.order_by('created_date')
 
     def get_object(self):
         obj = get_object_or_404(Player.objects.all(), pk=self.kwargs["pk"])
@@ -77,4 +77,6 @@ class GameEventView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return GameEvent.objects.filter(game_id__exact=self.kwargs['games_pk'])
+        return GameEvent.objects\
+            .filter(game_id__exact=self.kwargs['games_pk'])\
+            .order_by('created_date')

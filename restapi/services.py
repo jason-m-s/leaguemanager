@@ -8,7 +8,7 @@ class PlayerService:
 
     @staticmethod
     def get_players(user) -> QuerySet:
-        return UserFacade.get_all_players(user).order_by('created_date')
+        return UserFacade.get_all_players(user)
 
     @staticmethod
     def get_players_over_percentile(user, percentile) -> QuerySet:
@@ -23,7 +23,7 @@ class PlayerService:
         max_score = max(player_scores, key=lambda player_score: player_score.score).score
         percentile_score = min_score + (max_score - min_score) * (percentile / 100)
 
-        return player_scores.filter(score__gte=percentile_score).order_by('created_date')
+        return player_scores.filter(score__gte=percentile_score)
 
 
 class TeamService:
