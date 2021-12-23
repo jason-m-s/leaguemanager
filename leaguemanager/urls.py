@@ -17,13 +17,13 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework_nested import routers
 
-from restapi import views
-from restapi.views import GameEventView
+from rest_framework.authtoken import views
+from restapi.views import GameEventView, PlayerView, TeamView, GameView
 
 router = routers.DefaultRouter()
-router.register(r'players', views.PlayerView, basename='players')
-router.register(r'teams', views.TeamView, basename='teams')
-router.register(r'games', views.GameView, basename='games')
+router.register(r'players', PlayerView, basename='players')
+router.register(r'teams', TeamView, basename='teams')
+router.register(r'games', GameView, basename='games')
 
 games_router = routers.NestedSimpleRouter(router, r'games', lookup='games')
 games_router.register(r'events', GameEventView, basename='game-events')
@@ -32,5 +32,6 @@ urlpatterns = [
     path(r'', include(router.urls)),
     path(r'', include(games_router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('token/', views.obtain_auth_token),
     path('admin/', admin.site.urls),
 ]

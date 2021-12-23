@@ -1,0 +1,326 @@
+# Auth Users
+- model: restapi.leagueuser
+  pk: 1
+  fields:
+    password: pbkdf2_sha256$320000$E07tGv4JLOyyMQVAppoqH5$+xVduHOAPaO9N8x0rrSASziIl4Wj8zd5fWZJ9XN/xU0=
+    is_superuser: false
+    username: admin@domain.com
+    email: admin@domain.com
+    is_staff: false
+    is_active: true
+    user_type: ADM
+    groups: [ 1 ]
+    user_permissions: [ ]
+- model: restapi.leagueuser
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$320000$E07tGv4JLOyyMQVAppoqH5$+xVduHOAPaO9N8x0rrSASziIl4Wj8zd5fWZJ9XN/xU0=
+    is_superuser: false
+    username: coach1@domain.com
+    email: coach1@domain.com
+    is_staff: false
+    is_active: true
+    user_type: CCH
+    groups: [ 2 ]
+    user_permissions: [ ]
+- model: restapi.leagueuser
+  pk: 3
+  fields:
+    password: pbkdf2_sha256$320000$E07tGv4JLOyyMQVAppoqH5$+xVduHOAPaO9N8x0rrSASziIl4Wj8zd5fWZJ9XN/xU0=
+    is_superuser: false
+    username: coach2@domain.com
+    email: coach2@domain.com
+    is_staff: false
+    is_active: true
+    user_type: CCH
+    groups: [ 2 ]
+    user_permissions: [ ]
+- model: restapi.leagueuser
+  pk: 4
+  fields:
+    password: pbkdf2_sha256$320000$E07tGv4JLOyyMQVAppoqH5$+xVduHOAPaO9N8x0rrSASziIl4Wj8zd5fWZJ9XN/xU0=
+    is_superuser: false
+    username: player1A@domain.com
+    email: player1A@domain.com
+    first_name: 1A
+    is_staff: false
+    is_active: true
+    user_type: PLY
+    groups: [ 3 ]
+    user_permissions: [ ]
+- model: restapi.leagueuser
+  pk: 5
+  fields:
+    password: pbkdf2_sha256$320000$E07tGv4JLOyyMQVAppoqH5$+xVduHOAPaO9N8x0rrSASziIl4Wj8zd5fWZJ9XN/xU0=
+    is_superuser: false
+    username: player2A@domain.com
+    email: player2A@domain.com
+    first_name: 2A
+    is_staff: false
+    is_active: true
+    user_type: PLY
+    groups: [ 3 ]
+    user_permissions: [ ]
+- model: restapi.leagueuser
+  pk: 6
+  fields:
+    password: pbkdf2_sha256$320000$E07tGv4JLOyyMQVAppoqH5$+xVduHOAPaO9N8x0rrSASziIl4Wj8zd5fWZJ9XN/xU0=
+    is_superuser: false
+    username: player1B@domain.com
+    email: player1B@domain.com
+    first_name: 1B
+    is_staff: false
+    is_active: true
+    user_type: PLY
+    groups: [ 3 ]
+    user_permissions: [ ]
+- model: restapi.leagueuser
+  pk: 7
+  fields:
+    password: pbkdf2_sha256$320000$E07tGv4JLOyyMQVAppoqH5$+xVduHOAPaO9N8x0rrSASziIl4Wj8zd5fWZJ9XN/xU0=
+    is_superuser: false
+    username: player2B@domain.com
+    email: player2B@domain.com
+    first_name: 2B
+    is_staff: false
+    is_active: true
+    user_type: PLY
+    groups: [ 3 ]
+    user_permissions: [ ]
+
+# Teams
+- model: restapi.Team
+  pk: 1
+  fields:
+    name: Team A
+    created_date: 2021-09-09 05:00:00Z
+    updated_date: 2021-09-09 05:00:00Z
+- model: restapi.Team
+  pk: 2
+  fields:
+    name: Team B
+    created_date: 2021-09-09 06:00:00Z
+    updated_date: 2021-09-09 06:00:00Z
+
+# Coaches
+- model: restapi.Coach
+  pk: 2
+  fields:
+    created_date: 2021-09-09 04:00:00Z
+    updated_date: 2021-09-09 04:00:00Z
+    team_id: 1
+- model: restapi.Coach
+  pk: 3
+  fields:
+    created_date: 2021-09-09 04:00:00Z
+    updated_date: 2021-09-09 04:00:00Z
+    team_id: 2
+
+# Players
+- model: restapi.Player
+  pk: 4
+  fields:
+    height_cm: 175
+    team_id: 1
+    created_date: 2021-09-09 04:00:00Z
+    updated_date: 2021-09-09 04:00:00Z
+- model: restapi.Player
+  pk: 5
+  fields:
+    height_cm: 180
+    team_id: 1
+    created_date: 2021-09-09 04:00:00Z
+    updated_date: 2021-09-09 04:00:00Z
+- model: restapi.Player
+  pk: 6
+  fields:
+    height_cm: 176
+    team_id: 2
+    created_date: 2021-09-09 04:00:00Z
+    updated_date: 2021-09-09 04:00:00Z
+- model: restapi.Player
+  pk: 7
+  fields:
+    height_cm: 181
+    team_id: 2
+    created_date: 2021-09-09 04:00:00Z
+    updated_date: 2021-09-09 04:00:00Z
+
+# Games
+- model: restapi.Game
+  pk: 1
+  fields:
+    name: Game 1
+    start_date: 2021-10-10 08:00:00Z
+    end_date: 2021-10-10 10:00:00Z
+    created_date: 2021-10-09 05:00:00Z
+    updated_date: 2021-10-09 05:00:00Z
+- model: restapi.Game
+  pk: 2
+  fields:
+    name: Game 2
+    start_date: 2021-10-15 09:00:00Z
+    end_date: 2021-10-15 11:00:00Z
+    created_date: 2021-10-09 06:00:00Z
+    updated_date: 2021-10-09 06:00:00Z
+
+# GameTeams
+- model: restapi.GameTeam
+  pk: 1
+  fields:
+    game_id: 1
+    team_id: 1
+    score: 20
+- model: restapi.GameTeam
+  pk: 2
+  fields:
+    game_id: 1
+    team_id: 2
+    score: 30
+- model: restapi.GameTeam
+  pk: 3
+  fields:
+    game_id: 2
+    team_id: 1
+    score: 50
+- model: restapi.GameTeam
+  pk: 4
+  fields:
+    game_id: 2
+    team_id: 2
+    score: 40
+
+# PlayerGames
+- model: restapi.PlayerGame
+  pk: 1
+  fields:
+    player_id: 4
+    game_id: 1
+    score: 5
+- model: restapi.PlayerGame
+  pk: 2
+  fields:
+    player_id: 5
+    game_id: 1
+    score: 15
+- model: restapi.PlayerGame
+  pk: 3
+  fields:
+    player_id: 6
+    game_id: 1
+    score: 10
+- model: restapi.PlayerGame
+  pk: 4
+  fields:
+    player_id: 7
+    game_id: 1
+    score: 20
+- model: restapi.PlayerGame
+  pk: 5
+  fields:
+    player_id: 4
+    game_id: 2
+    score: 30
+- model: restapi.PlayerGame
+  pk: 6
+  fields:
+    player_id: 5
+    game_id: 2
+    score: 20
+- model: restapi.PlayerGame
+  pk: 7
+  fields:
+    player_id: 6
+    game_id: 2
+    score: 10
+- model: restapi.PlayerGame
+  pk: 8
+  fields:
+    player_id: 7
+    game_id: 2
+    score: 30
+
+# GameEvents
+- model: restapi.GameEvent
+  pk: 1
+  fields:
+    type: foul
+    description: Foul made by player1A
+    created_date: 2021-10-10 08:10:00Z
+    updated_date: 2021-10-10 08:10:00Z
+    game_id: 1
+- model: restapi.GameEvent
+  pk: 2
+  fields:
+    type: score
+    description: Player 1A scored 5 points for Team A
+    created_date: 2021-10-10 08:15:00Z
+    updated_date: 2021-10-10 08:15:00Z
+    game_id: 1
+- model: restapi.GameEvent
+  pk: 3
+  fields:
+    type: score
+    description: Player 2A scored 15 points for Team A
+    created_date: 2021-10-10 08:20:00Z
+    updated_date: 2021-10-10 08:20:00Z
+    game_id: 1
+- model: restapi.GameEvent
+  pk: 4
+  fields:
+    type: score
+    description: Player 1B scored 10 points for Team B
+    created_date: 2021-10-10 08:25:00Z
+    updated_date: 2021-10-10 08:25:00Z
+    game_id: 1
+- model: restapi.GameEvent
+  pk: 5
+  fields:
+    type: score
+    description: Player 2B scored 20 points for Team B
+    created_date: 2021-10-10 08:30:00Z
+    updated_date: 2021-10-10 08:30:00Z
+    game_id: 1
+
+- model: restapi.GameEvent
+  pk: 6
+  fields:
+    type: foul
+    description: Foul made by player1B
+    created_date: 2021-10-15 09:10:00Z
+    updated_date: 2021-10-15 09:10:00Z
+    game_id: 2
+- model: restapi.GameEvent
+  pk: 7
+  fields:
+    type: score
+    description: Player 1A scored 30 points for Team A
+    created_date: 2021-10-15 09:15:00Z
+    updated_date: 2021-10-15 09:15:00Z
+    game_id: 2
+- model: restapi.GameEvent
+  pk: 8
+  fields:
+    type: score
+    description: Player 2A scored 20 points for Team A
+    created_date: 2021-10-15 09:20:00Z
+    updated_date: 2021-10-15 09:20:00Z
+    game_id: 2
+- model: restapi.GameEvent
+  pk: 9
+  fields:
+    type: score
+    description: Player 1B scored 10 points for Team B
+    created_date: 2021-10-15 09:25:00Z
+    updated_date: 2021-10-15 09:25:00Z
+    game_id: 2
+- model: restapi.GameEvent
+  pk: 10
+  fields:
+    type: score
+    description: Player 2B scored 30 points for Team B
+    created_date: 2021-10-15 09:30:00Z
+    updated_date: 2021-10-15 09:30:00Z
+    game_id: 2
+
+

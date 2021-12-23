@@ -1,6 +1,8 @@
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from restapi.models import Player, Team, Game, GameEvent
+from restapi.permissions import IsLeagueAdmin, IsLeagueCoach
 from restapi.serializers import PlayerSerializer, TeamSerializer, GameSerializer, GameEventSerializer
 from restapi.services import PlayerService, TeamService
 
