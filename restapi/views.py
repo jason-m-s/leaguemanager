@@ -48,7 +48,7 @@ class TeamView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated & (IsLeagueAdmin | IsLeagueCoach)]
 
     def get_queryset(self):
-        return TeamService.get_teams(self.request.user)
+        return TeamService.get_teams(self.request.user).order_by('name')
 
     def get_object(self):
         obj = get_object_or_404(Team.objects.all(), pk=self.kwargs["pk"])

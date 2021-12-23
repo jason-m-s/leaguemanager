@@ -30,4 +30,4 @@ class TeamService:
 
     @staticmethod
     def get_teams(user):
-        return UserFacade.get_teams(user).order_by('name')
+        return UserFacade.get_teams(user)

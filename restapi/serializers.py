@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from restapi.models import Player, Team, Game, GameEvent
+from restapi.models import Player, Team, Game, GameEvent, GameTeam
 
 
 class PlayerSerializer(serializers.ModelSerializer):
@@ -30,11 +30,28 @@ class TeamSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class GameTeamSerializer(serializers.ModelSerializer):
+    id = serializers.SerializerMethodField()
+    name = serializers.SerializerMethodField()
+
+    def get_id(self, obj):
+        return obj.team.id
+
+    def get_name(self, obj):
+        return obj.team.name
+
+    class Meta:
+        model = GameTeam
+        fields = ['id', 'name', 'score']
+
+
 class GameSerializer(serializers.ModelSerializer):
+    teams = GameTeamSerializer(source='gameteam_set', many=True)
 
     class Meta:
         model = Game
-        fields = ['name', 'start_date', 'end_date', 'created_date', 'updated_date']
+        depth = 1
+        fields = ['name', 'start_date', 'end_date', 'created_date', 'updated_date', 'teams']
 
 
 class GameEventSerializer(serializers.ModelSerializer):
