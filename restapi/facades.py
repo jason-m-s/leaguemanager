@@ -20,7 +20,7 @@ class UserFacade:
         return players
 
     @staticmethod
-    def get_teams(user) -> QuerySet:
+    def get_all_teams(user) -> QuerySet:
         teams = Coach.objects.none()
 
         if user.user_type == LeagueUser.UserTypeChoice.COACH:

@@ -3,10 +3,11 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 
+from restapi.facades import UserFacade
 from restapi.models import Player, Team, Game, GameEvent
 from restapi.permissions import IsLeagueAdmin, IsLeagueCoach
 from restapi.serializers import PlayerSerializer, TeamSerializer, GameSerializer, GameEventSerializer
-from restapi.services import PlayerService, TeamService
+from restapi.services import PlayerService
 
 
 class PlayerView(viewsets.ModelViewSet):
@@ -19,12 +20,11 @@ class PlayerView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated & (IsLeagueAdmin | IsLeagueCoach)]
 
     def get_queryset(self):
-        user = self.request.user
-        players = PlayerService.get_players(self.request.user)
+        players = UserFacade.get_all_players(self.request.user)
 
         percentile = self.request.query_params.get('percentile')
         if percentile:
-            players = PlayerService.get_players_over_percentile(user, int(percentile))
+            players = PlayerService.filter_players_over_percentile(int(percentile), players)
 
         team_id = self.request.query_params.get('team_id')
         if team_id:
@@ -48,7 +48,7 @@ class TeamView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated & (IsLeagueAdmin | IsLeagueCoach)]
 
     def get_queryset(self):
-        return TeamService.get_teams(self.request.user).order_by('name')
+        return UserFacade.get_all_teams(self.request.user).order_by('name')
 
     def get_object(self):
         obj = get_object_or_404(Team.objects.all(), pk=self.kwargs["pk"])
