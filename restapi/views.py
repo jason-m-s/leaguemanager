@@ -8,6 +8,7 @@ from restapi.models import Player, Team, Game, GameEvent
 from restapi.permissions import IsLeagueAdmin, IsLeagueCoach
 from restapi.serializers import PlayerSerializer, TeamSerializer, GameSerializer, GameEventSerializer
 from restapi.services import PlayerService
+from restapi.validators import validate_percentile
 
 
 class PlayerView(viewsets.ModelViewSet):
@@ -23,7 +24,7 @@ class PlayerView(viewsets.ModelViewSet):
         players = UserFacade.get_all_players(self.request.user)
 
         percentile = self.request.query_params.get('percentile')
-        if percentile:
+        if percentile and validate_percentile(percentile):
             players = PlayerService.filter_players_over_percentile(int(percentile), players)
 
         team_id = self.request.query_params.get('team_id')

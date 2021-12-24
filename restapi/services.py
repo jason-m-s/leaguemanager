@@ -6,7 +6,6 @@ class PlayerService:
 
     @staticmethod
     def filter_players_over_percentile(percentile, player_qs) -> QuerySet:
-        # TODO: Validate if 0 < percentile < 100
         player_scores = player_qs.annotate(score=Coalesce(Sum('playergame__score'), 0))
 
         # A discrete uniform distribution is used (https://en.wikipedia.org/wiki/Discrete_uniform_distribution)
