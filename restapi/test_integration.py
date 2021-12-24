@@ -153,14 +153,24 @@ class TeamTestCases(APITestCase):
 
         self.assertEqual(HTTP_403_FORBIDDEN, client.get('/teams/2/').status_code)
 
-    def test_coach_user_get_related_player(self):
+    def test_coach_user_get_related_team(self):
         """Checks if an attempt by coach to access a related player succeeds"""
         client = APIClient()
         auth_res = client.post('/token/', {'username': 'coach1@domain.com', 'password': 'test123#'}, format='json')
         client.credentials(HTTP_AUTHORIZATION=f'Token {auth_res.data["token"]}')
 
-        response = client.get('/players/4/')
-        self.assertEqual('1A', response.data['name'])
+        response = client.get('/teams/1/')
+        self.assertEqual('Team A', response.data['name'])
+
+    def test_coach_user_get_related_team_with_summary(self):
+        """Checks if an attempt by coach to access a related player with summary succeeds"""
+        client = APIClient()
+        auth_res = client.post('/token/', {'username': 'coach1@domain.com', 'password': 'test123#'}, format='json')
+        client.credentials(HTTP_AUTHORIZATION=f'Token {auth_res.data["token"]}')
+
+        response = client.get('/teams/1/?expand=summary')
+        self.assertEqual('Team A', response.data['name'])
+        self.assertEqual(35, response.data["avg_score"])
 
     # Admin Test Cases
     def test_admin_user_list_teams(self):
@@ -183,6 +193,16 @@ class TeamTestCases(APITestCase):
 
         response = client.get('/teams/2/')
         self.assertEqual('Team B', response.data['name'])
+
+    def test_admin_user_get_related_team_with_summary(self):
+        """Checks if an attempt by admin to access a related player with summary succeeds"""
+        client = APIClient()
+        auth_res = client.post('/token/', {'username': 'admin@domain.com', 'password': 'test123#'}, format='json')
+        client.credentials(HTTP_AUTHORIZATION=f'Token {auth_res.data["token"]}')
+
+        response = client.get('/teams/2/?expand=summary')
+        self.assertEqual('Team B', response.data['name'])
+        self.assertEqual(35, response.data["avg_score"])
 
 
 class GameTestCases(APITestCase):

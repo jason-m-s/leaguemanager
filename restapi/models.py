@@ -18,6 +18,11 @@ class Team(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
+    def get_team_summary(self):
+        summary = GameTeam.objects.filter(team_id__exact=self.id) \
+            .aggregate(total=Coalesce(Sum('score'), 0), count=Coalesce(Count('score'), 0))
+        return [summary['total'], summary['count']]
+
 
 class Coach(models.Model):
     id = models.OneToOneField(LeagueUser, on_delete=models.CASCADE, primary_key=True)

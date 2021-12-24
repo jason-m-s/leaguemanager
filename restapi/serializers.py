@@ -25,6 +25,20 @@ class PlayerSerializer(serializers.ModelSerializer):
 
 
 class TeamSerializer(serializers.ModelSerializer):
+
+    def to_representation(self, obj):
+        data = super().to_representation(obj)
+
+        if self.has_expand_summary():
+            total, count = obj.get_team_summary()
+            data['avg_score'] = (total / count) if count > 0 else 0
+
+        return data
+
+    def has_expand_summary(self):
+        expand_params = self.context['request'].GET.getlist('expand', [])
+        return 'summary' in expand_params
+
     class Meta:
         model = Team
         fields = '__all__'
