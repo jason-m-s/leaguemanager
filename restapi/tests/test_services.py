@@ -1,7 +1,7 @@
 from django.test import TestCase
 
+from restapi.models import Player, LeagueUser, Game, PlayerGame
 from restapi.services import PlayerService
-from restapi.models import Player, LeagueUser, Coach, Team, Game, PlayerGame
 
 
 class PlayerServiceTestCase(TestCase):

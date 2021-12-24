@@ -2,7 +2,7 @@ from django.http import HttpRequest
 from django.test import TestCase
 from rest_framework.request import Request
 
-from restapi.models import Player, LeagueUser, Game, PlayerGame, Team, Coach
+from restapi.models import Player, LeagueUser, Team, Coach
 from restapi.permissions import IsLeagueAdmin, IsLeagueCoach, IsLeaguePlayer
 
 
