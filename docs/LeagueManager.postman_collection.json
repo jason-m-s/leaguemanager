@@ -160,14 +160,20 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{domain}}/teams/{{team_id}}/",
+					"raw": "{{domain}}/teams/2/?expand=summary",
 					"host": [
 						"{{domain}}"
 					],
 					"path": [
 						"teams",
-						"{{team_id}}",
+						"2",
 						""
+					],
+					"query": [
+						{
+							"key": "expand",
+							"value": "summary"
+						}
 					]
 				}
 			},
