@@ -30,6 +30,11 @@ If the token associates with a Coach, then this will do the filtering only withi
 While supported in both `/players/` and `/teams/` APIs along with their `/{id}` counterparts, it is advised to not use it 
 in the list views due possible performance reasons of averaging all entries individually (safe to use in `/{id}`)
 
+
+**Create, Update and Delete endpoints, while provided as part of the contract, are not fully tested 
+(since they were not part of the requirement). Only Read operations over GET are fully supported 
+(along with the token endpoint)**
+
 ## Authentication
 
 * Simple token based authentication is implemented (no expiry since this is a demo application)
