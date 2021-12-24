@@ -11,22 +11,22 @@ class UserFacadeTestCase(TestCase):
 
         p1_user = LeagueUser.objects.create(
             username='p1@domain.com', password='pass', user_type=LeagueUser.UserTypeChoice.PLAYER)
-        player1 = Player.objects.create(id=p1_user, name='p1', height_cm=170, team=team_a)
+        Player.objects.create(id=p1_user, name='p1', height_cm=170, team=team_a)
 
         p2_user = LeagueUser.objects.create(
             username='p2@domain.com', password='pass', user_type=LeagueUser.UserTypeChoice.PLAYER)
-        player2 = Player.objects.create(id=p2_user, name='p2', height_cm=175, team=team_b)
+        Player.objects.create(id=p2_user, name='p2', height_cm=175, team=team_b)
 
         c1_user = LeagueUser.objects.create(
             username='c1@domain.com', password='pass', user_type=LeagueUser.UserTypeChoice.COACH)
-        coach1 = Coach.objects.create(id=c1_user, team=team_a)
+        Coach.objects.create(id=c1_user, team=team_a)
 
-        admin_user = LeagueUser.objects.create(
+        LeagueUser.objects.create(
             username='admin@domain.com', password='pass', user_type=LeagueUser.UserTypeChoice.ADMIN)
 
         no_team_coach_user = LeagueUser.objects.create(
             username='no_team_coach@domain.com', password='pass', user_type=LeagueUser.UserTypeChoice.COACH)
-        no_team_coach = Coach.objects.create(id=no_team_coach_user)
+        Coach.objects.create(id=no_team_coach_user)
 
     # Player loading test cases
     def test_players_for_unauthenticated_user(self):
