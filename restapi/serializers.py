@@ -53,7 +53,7 @@ class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
         depth = 1
-        fields = ['name', 'start_date', 'end_date', 'created_date', 'updated_date', 'teams']
+        fields = ['id', 'name', 'start_date', 'end_date', 'created_date', 'updated_date', 'teams']
 
 
 class GameEventSerializer(serializers.ModelSerializer):
