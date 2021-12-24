@@ -5,7 +5,7 @@
 * Python 3.8+ (developed on 3.8.9)
 * Django 4.0+
 
-## Specification
+Please read the **Specification.md** file to learn about what this application can do
 
 ## How to run the application
 
@@ -54,9 +54,12 @@ curl -X POST -H "Content-Type: application/json" \
 {"token":"0b29f4462aa7e617a254bd95413510c3638b8ab4"}
 </pre>
 
-2. Include the above token to test any of the endpoints specified in the **Specification** section
+2. Include the above token to test any of the endpoints specified in the **Specification.md** file
 
 <pre>
 curl -X GET http://localhost:8000/path/to/api \
     -H "Authorization: Token {token}" 
 </pre>
+
+3. (Optional) A postman collection along with environment has been provided under the `docs/` directory 
+if you want to browse the full API

@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "9048ce9e-32e3-43b4-8b26-7a4a770f2084",
+		"name": "LeagueManager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth | Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc9fe100-7037-4401-9eff-644527492f50",
+						"exec": [
+							"var jsonValue = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonValue.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"{{username}}\",\n\t\"password\": \"{{password}}\"\n}"
+				},
+				"url": {
+					"raw": "{{domain}}/token/",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"token",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Players | List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/players/?percentile=90",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"players",
+						""
+					],
+					"query": [
+						{
+							"key": "percentile",
+							"value": "90"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Players | Get Single",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/players/{{player_id}}/?expand=summary",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"players",
+						"{{player_id}}",
+						""
+					],
+					"query": [
+						{
+							"key": "expand",
+							"value": "summary"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Teams | List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/teams/",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"teams",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Teams | Get Single",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/teams/{{team_id}}/",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"teams",
+						"{{team_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Games | List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/games/",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"games",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Game Events | List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/games/{{game_id}}/events/",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"games",
+						"{{game_id}}",
+						"events",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
