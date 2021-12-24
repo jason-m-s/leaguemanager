@@ -125,6 +125,7 @@ class IsLeagueCoachTestCase(TestCase):
 
 class IsLeaguePlayerTestCase(TestCase):
     def test_unauthenticated_user_fails_player_permission(self):
+        """Checks if an unauthenticated user is denied player permission"""
         request = Request(HttpRequest())
         request.user = LeagueUser()
 
@@ -132,6 +133,7 @@ class IsLeaguePlayerTestCase(TestCase):
         self.assertFalse(IsLeaguePlayer().has_object_permission(request, None, None))
 
     def test_admin_user_fails_player_permission(self):
+        """Checks if an admin user is denied player permission"""
         request = Request(HttpRequest())
         request.user = LeagueUser(user_type=LeagueUser.UserTypeChoice.ADMIN)
 
@@ -139,6 +141,7 @@ class IsLeaguePlayerTestCase(TestCase):
         self.assertFalse(IsLeaguePlayer().has_object_permission(request, None, None))
 
     def test_coach_user_fails_player_permission(self):
+        """Checks if a coach user is denied player permission"""
         request = Request(HttpRequest())
         request.user = LeagueUser(user_type=LeagueUser.UserTypeChoice.COACH)
 
@@ -146,6 +149,7 @@ class IsLeaguePlayerTestCase(TestCase):
         self.assertFalse(IsLeaguePlayer().has_object_permission(request, None, None))
 
     def test_player_user_passes_player_permission_except_object(self):
+        """Checks if a player user is succeeds player permission but is still denied object permission"""
         request = Request(HttpRequest())
         request.user = LeagueUser(user_type=LeagueUser.UserTypeChoice.PLAYER)
 

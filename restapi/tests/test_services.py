@@ -32,6 +32,7 @@ class PlayerServiceTestCase(TestCase):
         PlayerGame.objects.create(player=p4, game=game_c, score=11)
 
     def test_filter_over_90_percentile(self):
+        """Checks if players are filtered over the 90th percentile"""
         # totals {p1, p2, p3, p4} = 60, 30, 45, 26
         # 90th percentile in uniform distribution is min + (max - min) * 0.90 = 56
         # Should return all players with total score > 56 (p1)
@@ -42,6 +43,7 @@ class PlayerServiceTestCase(TestCase):
         self.assertEqual('p1', players[0].name)
 
     def test_filter_over_50_percentile(self):
+        """Checks if players are filtered over the 50th percentile"""
         # 50th percentile = 43
         # Should return all players with total score > 43 (p1, p3)
         players = PlayerService.filter_players_over_percentile(50, Player.objects.all())
