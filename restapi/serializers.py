@@ -30,23 +30,25 @@ class TeamSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class GameTeamSerializer(serializers.ModelSerializer):
-    id = serializers.SerializerMethodField()
-    name = serializers.SerializerMethodField()
+class GameTeamForGameSerializer(serializers.ModelSerializer):
+    team_id = serializers.SerializerMethodField()
+    team_name = serializers.SerializerMethodField()
 
-    def get_id(self, obj):
+    @staticmethod
+    def get_team_id(obj):
         return obj.team.id
 
-    def get_name(self, obj):
+    @staticmethod
+    def get_team_name(obj):
         return obj.team.name
 
     class Meta:
         model = GameTeam
-        fields = ['id', 'name', 'score']
+        fields = ['id', 'team_id', 'team_name', 'score']
 
 
 class GameSerializer(serializers.ModelSerializer):
-    teams = GameTeamSerializer(source='gameteam_set', many=True)
+    teams = GameTeamForGameSerializer(source='gameteam_set', many=True)
 
     class Meta:
         model = Game
