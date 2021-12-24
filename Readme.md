@@ -63,3 +63,9 @@ curl -X GET http://localhost:8000/path/to/api \
 
 3. (Optional) A postman collection along with environment has been provided under the `docs/` directory 
 if you want to browse the full API
+
+4. (Optional) If you want to run the tests of the application, run the following command:
+
+<pre>
+python manage.py test
+</pre>
