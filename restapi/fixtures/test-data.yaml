@@ -196,13 +196,13 @@
   fields:
     player_id: 4
     game_id: 1
-    score: 5
+    score: 0
 - model: restapi.PlayerGame
   pk: 2
   fields:
     player_id: 5
     game_id: 1
-    score: 15
+    score: 20
 - model: restapi.PlayerGame
   pk: 3
   fields:
