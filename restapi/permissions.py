@@ -21,7 +21,7 @@ class IsLeagueCoach(BasePermission):
             return False
 
         if isinstance(obj, Player):
-            return obj.team_id is not None and obj.team_id == Coach.objects.get(request.user.id).team_id
+            return obj.team_id is not None and obj.team_id == Coach.objects.get(pk=request.user.id).team_id
 
         if isinstance(obj, Team):
             return obj.id == Coach.objects.get(pk=request.user.id).team_id

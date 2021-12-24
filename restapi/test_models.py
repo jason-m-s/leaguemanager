@@ -20,6 +20,7 @@ class PlayerTestCase(TestCase):
         Player.objects.create(id=benched_player_user, name='benched', height_cm=175)
 
     def test_benched_player_summary(self):
+        """Checks if a non-active player returns summary as zero"""
         player = Player.objects.get(id__username='benched@domain.com')
         total, count = player.get_player_summary()
 
@@ -27,6 +28,7 @@ class PlayerTestCase(TestCase):
         self.assertEqual(0, count)
 
     def test_active_player_summary(self):
+        """Checks if active player returns proper summary values"""
         player = Player.objects.get(id__username='p1@domain.com')
         total, count = player.get_player_summary()
 
